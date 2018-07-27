@@ -17,7 +17,7 @@ namespace Student.DataAccess.Dao.Repository
         public StudenDaoSql(ILogger log)
         {
             this.log = log;
-            connectionString = "Data Source=.; Inital Catalg= AlumnosCrud; Integrated Security= true";
+            connectionString = "Data Source=.; Inital Catalg= Curso; Integrated Security= true";
         }
 
         public int Create(Alumno alumno)
