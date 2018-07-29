@@ -9,6 +9,10 @@ namespace Student.DataAccess.Dao.Interfaces
 {
     public interface IRepository
     {
-        int Create(Alumno alumno);
+        Alumno Create(Alumno alumno);
+        List<Alumno> GetAlumnos();
+        Alumno GetAlumnoById(int id);
+        bool DeleteAlumnoById(int id);
+        Alumno UpDateAlumno(Alumno alumno, int id);
     }
 }

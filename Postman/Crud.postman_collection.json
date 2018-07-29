@@ -1,0 +1,182 @@
+{
+	"info": {
+		"_postman_id": "8011cf86-8b2e-46a4-9731-c74bdc9e95fa",
+		"name": "Crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "e20e6fb9-ede8-4808-a963-3cf28637190f",
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 0,\r\n  \"Dni\": \"21363458L\",\r\n  \"Nombre\": \"Pepito\",\r\n  \"Apellidos\": \"Puertas\",\r\n  \"Edad\": 15,\r\n  \"Nacimiento\": \"2003-01-02\",\r\n  \"Registro\": \"\",\r\n  \"Guid\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:57797/api/Alumno/Post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57797",
+					"path": [
+						"api",
+						"Alumno",
+						"Post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "eeee0c18-3314-4f52-abef-eddef4305224",
+			"name": "GetAll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 0,\r\n  \"Dni\": \"85693256D\",\r\n  \"Nombre\": \"Martin\",\r\n  \"Apellidos\": \"Kendall\",\r\n  \"Edad\": 21,\r\n  \"Nacimiento\": \"1999-04-22\",\r\n  \"Registro\": \"\",\r\n  \"Guid\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:57797/api/Alumno/GetAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57797",
+					"path": [
+						"api",
+						"Alumno",
+						"GetAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "203624fe-7199-445c-b194-43bd679fab2a",
+			"name": "GetById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 0,\r\n  \"Dni\": \"85693256D\",\r\n  \"Nombre\": \"Martin\",\r\n  \"Apellidos\": \"Kendall\",\r\n  \"Edad\": 21,\r\n  \"Nacimiento\": \"1999-04-22\",\r\n  \"Registro\": \"\",\r\n  \"Guid\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:57797/api/Alumno/Get?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57797",
+					"path": [
+						"api",
+						"Alumno",
+						"Get"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1d8c13db-cf0e-4d1a-9737-223df4cbf9c4",
+			"name": "DeleteById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Id\": 0,\r\n  \"Dni\": \"85693256D\",\r\n  \"Nombre\": \"Martin\",\r\n  \"Apellidos\": \"Kendall\",\r\n  \"Edad\": 21,\r\n  \"Nacimiento\": \"1999-04-22\",\r\n  \"Registro\": \"\",\r\n  \"Guid\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:57797/api/Alumno/Get?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57797",
+					"path": [
+						"api",
+						"Alumno",
+						"Get"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "60d697bf-b8b3-4257-9ebd-2a693f23fc3d",
+			"name": "UpDate",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Dni\": \"65451236J\",\r\n  \"Nombre\": \"Charlie\",\r\n  \"Apellidos\": \"Smith\",\r\n  \"Edad\": 27,\r\n  \"Nacimiento\": \"1991-09-20\",\r\n  \"Registro\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:57797/api/Alumno/Put?id=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "57797",
+					"path": [
+						"api",
+						"Alumno",
+						"Put"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

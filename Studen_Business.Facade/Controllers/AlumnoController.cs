@@ -1,11 +1,13 @@
 ﻿using Student.Business.Logic.BusinessLogic;
 using Student.Common.Logic.Log4net;
+using Student.Common.Logic.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace Studen_Business.Facade.Controllers
 {
@@ -26,28 +28,70 @@ namespace Studen_Business.Facade.Controllers
         {
             Log.Debug("" + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-            return Ok();
+            List<Alumno> alumnos = studenBl.GetAlumnos();
+
+            return Ok(alumnos);
         }
 
         // GET: api/Alumno/5
-        public string Get(int id)
+        [HttpGet()]
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            Log.Debug("" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            Alumno alumno = studenBl.GetAlumnoById(id);
+
+            return Ok(alumno);
         }
 
         // POST: api/Alumno
-        public void Post([FromBody]string value)
+
+        [HttpPost()]
+        [ResponseType(typeof(Alumno))]
+        public IHttpActionResult Post(Alumno alumno)
         {
+
+            try
+            {
+                Alumno alumnoInset = studenBl.Create(alumno);
+                return CreatedAtRoute("DefaultApi",
+                    new { id = alumnoInset.Id }, alumnoInset);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
         }
 
         // PUT: api/Alumno/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut()]
+        [ResponseType(typeof(Alumno))]
+        public IHttpActionResult Put(int id, Alumno alumno)
         {
+
+            try
+            {
+                Alumno alumnoInset = studenBl.UpDateAlumno(alumno, id);
+                return Ok(alumnoInset);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex + System.Reflection.MethodBase.GetCurrentMethod().Name);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
         }
 
+        [HttpDelete()]
         // DELETE: api/Alumno/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+
+            Log.Debug("" + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+            bool IsDelete = studenBl.DeleteAlumnoById(id);
+
+            return Ok(IsDelete);
         }
     }
 }

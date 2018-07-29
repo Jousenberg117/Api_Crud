@@ -8,6 +8,7 @@ using System.Reflection;
 using Student.Business.Logic.BusinessLogic;
 using Student.Common.Logic.Log4net;
 using Student.Business.Logic.Modules;
+using Student.Common.Logic.Model;
 
 namespace Studen_Business.Facade.Modules
 {
@@ -25,7 +26,6 @@ namespace Studen_Business.Facade.Modules
                 .RegisterType<Log4netAdapter>()
                 .As<ILogger>()
                 .InstancePerRequest();
-
 
             builder.RegisterModule(new BusinessModule());
 
