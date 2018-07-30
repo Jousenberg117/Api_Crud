@@ -33,7 +33,7 @@ namespace Student.DataAccess.Dao.Repository
             try
             {
                 var sql = "Insert into dbo.Alumno (RowGuid,Nombre,Apellidos,Dni,Nacimiento,Registro,Edad)" +
-                    "Values(@RowGuid,@Nombre,@Apellidos,@DNI,@Registro,@Nacimiento,@Edad); ";
+                    "Values(@RowGuid,@Nombre,@Apellidos,@DNI,@Registro,@Nacimiento,@Edad);";
 
                 using (SqlConnection _conn = new SqlConnection(connectionString))
                 {
@@ -76,7 +76,7 @@ namespace Student.DataAccess.Dao.Repository
         public List<Alumno> GetAlumnos()
         {
             List<Alumno> alumnos = new List<Alumno>();
-            var sql = "SELECT * FROM dbo.Alumno";
+            var sql = "usp_GetAllAlumnos";
 
             using (SqlConnection _conn = new SqlConnection(connectionString))
             {
@@ -106,7 +106,7 @@ namespace Student.DataAccess.Dao.Repository
         }
         public Alumno GetAlumnoById(int id)
         {
-            var sql = "SELECT * FROM dbo.Alumno WHERE id= '" + id + "'";
+            var sql = "usp_GetAlumnoByID @id";
 
             var alumno = StudentContainer.Resolve();
             using (SqlConnection _conn = new SqlConnection(connectionString))
@@ -114,6 +114,8 @@ namespace Student.DataAccess.Dao.Repository
                 using (SqlCommand _cmd = new SqlCommand(sql, _conn))
                 {
                     _conn.Open();
+                    _cmd.Parameters.AddWithValue("@id", id);
+
                     SqlDataReader reader = _cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -133,7 +135,7 @@ namespace Student.DataAccess.Dao.Repository
         }
         public bool DeleteAlumnoById(int id)
         {
-            var sql = "DELETE FROM dbo.Alumno WHERE id= '" + id + "'";
+            var sql = " usp_DeleteAlumnoByID @id";
 
             var alumno = StudentContainer.Resolve();
             using (SqlConnection _conn = new SqlConnection(connectionString))
@@ -141,27 +143,28 @@ namespace Student.DataAccess.Dao.Repository
                 using (SqlCommand _cmd = new SqlCommand(sql, _conn))
                 {
                     _conn.Open();
+                    _cmd.Parameters.AddWithValue("@id", id);
                     _cmd.ExecuteNonQuery();
                 }
             }
             bool IsDelete = GetAlumnoById(id).Id == 0;
             return IsDelete;
         }
-        public Alumno UpDateAlumno(Alumno alumno, int id)
+        public Alumno UpdateAlumno(Alumno alumno, int id)
         {
             alumno.Registro = DateTime.Now;
 
-            Alumno alumnoInsert;
             try
             {
-                var sql = "UPDATE Alumno SET Nombre = @Nombre, Apellidos = @Apellidos, Dni = @DNI," +
-                    "Nacimiento = @Nacimiento,Registro = @Registro,Edad = @Edad WHERE id= '" + id + "'";
+                var sql = "usp_UpdateAlumnoByID @id, @Nombre, @Apellidos, @DNI, " +
+                           "@Registro, @Nacimiento, @Edad";
 
                 using (SqlConnection _conn = new SqlConnection(connectionString))
                 {
                     using (SqlCommand _cmd = new SqlCommand(sql, _conn))
                     {
                         _conn.Open();
+                        _cmd.Parameters.AddWithValue("@id", id);
                         _cmd.Parameters.AddWithValue("@Nombre", alumno.Nombre);
                         _cmd.Parameters.AddWithValue("@Apellidos", alumno.Apellidos);
                         _cmd.Parameters.AddWithValue("@DNI", alumno.Dni);
@@ -170,12 +173,6 @@ namespace Student.DataAccess.Dao.Repository
                         _cmd.Parameters.AddWithValue("@Edad", alumno.Edad);
                         _cmd.ExecuteNonQuery();
                         _cmd.Parameters.Clear();
-
-                        _cmd.CommandText = "SELECT @@Identity FROM dbo.Alumno";
-
-                        int idInsert = Convert.ToInt32(_cmd.ExecuteNonQuery());
-
-                        alumnoInsert = GetAlumnoById(id);
 
                         return alumno;
                     }
@@ -193,6 +190,6 @@ namespace Student.DataAccess.Dao.Repository
                 throw ex;
             }
         }
-    
+
     }
 }

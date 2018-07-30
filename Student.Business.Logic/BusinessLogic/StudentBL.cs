@@ -56,12 +56,12 @@ namespace Student.Business.Logic.BusinessLogic
                 return repository.GetAlumnos();
         }
 
-        public Alumno UpDateAlumno(Alumno alumno, int id)
+        public Alumno UpdateAlumno(Alumno alumno, int id)
         {
             try
             {
                 Log.Debug("" + System.Reflection.MethodBase.GetCurrentMethod().Name);
-                return repository.UpDateAlumno(alumno, id);
+                return repository.UpdateAlumno(alumno, id);
             }
             catch (Exception ex)
             {

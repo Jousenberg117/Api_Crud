@@ -72,7 +72,7 @@ namespace Studen_Business.Facade.Controllers
 
             try
             {
-                Alumno alumnoInset = studenBl.UpDateAlumno(alumno, id);
+                Alumno alumnoInset = studenBl.UpdateAlumno(alumno, id);
                 return Ok(alumnoInset);
             }
             catch (Exception ex)
